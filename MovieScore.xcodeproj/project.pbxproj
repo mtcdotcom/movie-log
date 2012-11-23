@@ -31,6 +31,7 @@
 		84C94BC814CD8CD300143E74 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C94BC714CD8CD300143E74 /* Twitter.framework */; };
 		84C94BDE14CF05B900143E74 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C94BDD14CF05B800143E74 /* MessageUI.framework */; };
 		84EAB5EC14C2F9D6008CE919 /* Term.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EAB5EB14C2F9D6008CE919 /* Term.m */; };
+		84ED2025165F377200A2CBAC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED2024165F377100A2CBAC /* Default-568h@2x.png */; };
 		84F0D36B14DE1A7100836C57 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F0D36A14DE1A7100836C57 /* QuartzCore.framework */; };
 		84F0D36F14DE41AA00836C57 /* InputText.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0D36E14DE41AA00836C57 /* InputText.m */; };
 		84F0D37614DE738A00836C57 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0D37514DE738A00836C57 /* DatePicker.m */; };
@@ -77,6 +78,7 @@
 		84C94BDD14CF05B800143E74 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		84EAB5EA14C2F9D5008CE919 /* Term.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Term.h; sourceTree = "<group>"; };
 		84EAB5EB14C2F9D6008CE919 /* Term.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Term.m; sourceTree = "<group>"; };
+		84ED2024165F377100A2CBAC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		84F0D36A14DE1A7100836C57 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		84F0D36D14DE41A900836C57 /* InputText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputText.h; sourceTree = "<group>"; };
 		84F0D36E14DE41AA00836C57 /* InputText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputText.m; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		847E6FFA137ACF6200B1141B = {
 			isa = PBXGroup;
 			children = (
+				84ED2024165F377100A2CBAC /* Default-568h@2x.png */,
 				84F8BE76152D81290075777D /* Icon@2x.png */,
 				84F8BE74152D81250075777D /* Icon.png */,
 				847E700F137ACF6200B1141B /* MovieScore */,
@@ -284,6 +287,7 @@
 				840C1CB414EA9C4A00D3EE8F /* nophoto.png in Resources */,
 				84F8BE75152D81250075777D /* Icon.png in Resources */,
 				84F8BE77152D81290075777D /* Icon@2x.png in Resources */,
+				84ED2025165F377200A2CBAC /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
