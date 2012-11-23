@@ -290,7 +290,7 @@
             CGSize bounds = CGSizeMake(self.tableView.frame.size.width, self.tableView.frame.size.height);
             CGSize size   = [memo_ sizeWithFont:cell.textLabel.font
                               constrainedToSize:bounds
-                                  lineBreakMode:UILineBreakModeCharacterWrap];
+                                  lineBreakMode:NSLineBreakByCharWrapping];
             height = size.height > 132.0 ? size.height + 20.0 : 132.0;
             break;
         }
@@ -392,14 +392,14 @@
             cell.backgroundColor         = TABLEVIEW_BGCOLOR;
             cell.textLabel.font          = CELL_DETAIL_TEXT_FONT;
             cell.textLabel.textColor     = CELL_DETAIL_TEXT_COLOR;
-            cell.textLabel.textAlignment = UITextAlignmentLeft;
+            cell.textLabel.textAlignment = NSTextAlignmentLeft;
         }
         if ([self isNotNil:memo_]) {
             cell.textLabel.text = memo_;
         }
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.numberOfLines = 0;
-        cell.textLabel.textAlignment = UITextAlignmentLeft;
+        cell.textLabel.textAlignment = NSTextAlignmentLeft;
     }
 
     return cell;

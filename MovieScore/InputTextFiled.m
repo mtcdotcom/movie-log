@@ -61,7 +61,7 @@
             if (value_ && [value_ intValue] != 0) {
                 textField_.text = value_;
             }
-            textField_.textAlignment = UITextAlignmentRight;
+            textField_.textAlignment = NSTextAlignmentRight;
             break;
         case INPUT_TYPE_AMOUNT:
             self.title = @"金額";
@@ -69,7 +69,7 @@
             if (value_ && [value_ intValue] != 0) {
                 textField_.text = value_;
             }
-            textField_.textAlignment = UITextAlignmentRight;
+            textField_.textAlignment = NSTextAlignmentRight;
             break;
         default:
             break;

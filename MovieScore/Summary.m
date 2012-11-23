@@ -292,7 +292,7 @@
     place.backgroundColor = SECTION_BGCOLOR;
     place.textColor       = SECTION_COLOR;
     place.font            = SECTION_FONT;
-    place.textAlignment   = UITextAlignmentRight;
+    place.textAlignment   = NSTextAlignmentRight;
     place.text            = [masterData_ placeType:placeType_];  
 
     switch (section) {

@@ -204,7 +204,7 @@
         
         scoreLabel.textColor       = CELL_SCORE_COLOR;
         scoreLabel.font            = CELL_SCORE_FONT;
-        scoreLabel.textAlignment   = UITextAlignmentCenter;
+        scoreLabel.textAlignment   = NSTextAlignmentCenter;
         scoreLabel.backgroundColor = TABLEVIEW_BGCOLOR;
         scoreLabel.tag = TAG_NO_SCORE_LABE;
         
@@ -215,7 +215,7 @@
         
         dateLabel.textColor        = CELL_INFO_COLOR;
         dateLabel.font             = CELL_INFO_FONT;
-        dateLabel.textAlignment    = UITextAlignmentCenter;
+        dateLabel.textAlignment    = NSTextAlignmentCenter;
         dateLabel.backgroundColor  = TABLEVIEW_BGCOLOR;
         dateLabel.tag = TAG_NO_DATE_LABEL;
 
@@ -258,41 +258,64 @@
 {
     NSManagedObject *managedObject = [modelManager_ fetchObject:@"Movies" WithRow:0 AndSection:section];
     
-    NSString *labelText = [[[NSString alloc] init] autorelease];
+    NSString *yearlabelText     = [[[NSString alloc] init] autorelease];
+    NSString *sortLabelText     = [[[NSString alloc] init] autorelease];
+    NSString *titlesLabelText   = [[[NSString alloc] init] autorelease];
+    
+    yearlabelText   = [NSString stringWithFormat:@"   %@ 年", year_];
+    titlesLabelText = [NSString stringWithFormat:@"作品数 : %@",
+                       [countDict_ objectForKey:[NSNumber numberWithInt:section]]];
+
     switch(sortType_) {
         case SORT_TYPE_SCORE:
-            labelText = [NSString stringWithFormat:@"   %@ 年  %0.1f 点    作品数 : %@",
-                         year_,
-                         [[managedObject valueForKey:@"score"] floatValue],
-                         [countDict_ objectForKey:[NSNumber numberWithInt:section]]];
+            sortLabelText = [NSString stringWithFormat:@"%0.1f 点", [[managedObject valueForKey:@"score"] floatValue]];
             break;
         case SORT_TYPE_MONTH:
-            labelText = [NSString stringWithFormat:@"   %@ 年     %d 月    作品数 : %@",
-                         year_,
-                         [[managedObject valueForKey:@"month"] intValue],
-                         [countDict_ objectForKey:[NSNumber numberWithInt:section]]];
+            if ([[managedObject valueForKey:@"month"] intValue] > 9) {
+                sortLabelText = [NSString stringWithFormat:@"%d 月", [[managedObject valueForKey:@"month"] intValue]];
+            } else {
+                sortLabelText = [NSString stringWithFormat:@" %d 月", [[managedObject valueForKey:@"month"] intValue]];
+            }
             break;
         default:
             break;
     }
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 22.0)];
-    label.backgroundColor = SECTION_BGCOLOR;
-    label.textColor       = SECTION_COLOR;
-    label.font            = SECTION_FONT;
-    label.text            = labelText;
+    UILabel *yearlabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 22.0)];
+    yearlabel.backgroundColor   = SECTION_BGCOLOR;
+    yearlabel.textColor         = SECTION_COLOR;
+    yearlabel.font              = SECTION_FONT;
+    yearlabel.text              = yearlabelText;
+
+    UILabel *sortLabel = [[UILabel alloc] initWithFrame:CGRectMake(70.0, 0.0, 40.0, 22.0)];
+    sortLabel.backgroundColor   = SECTION_BGCOLOR;
+    sortLabel.textColor         = SECTION_COLOR;
+    sortLabel.font              = SECTION_FONT;
+    sortLabel.textAlignment     = NSTextAlignmentRight;
+    sortLabel.text              = sortLabelText;
+    
+    UILabel *titlesLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 0.0, 80.0, 22.0)];
+    titlesLabel.backgroundColor = SECTION_BGCOLOR;
+    titlesLabel.textColor       = SECTION_COLOR;
+    titlesLabel.font            = SECTION_FONT;
+    titlesLabel.textAlignment   = NSTextAlignmentLeft;
+    titlesLabel.text            = titlesLabelText;
 
     UILabel *place = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 70.0, 0.0, 60.0, 22.0)];
     place.backgroundColor = SECTION_BGCOLOR;
     place.textColor       = SECTION_COLOR;
     place.font            = SECTION_FONT;
-    place.textAlignment   = UITextAlignmentRight;
+    place.textAlignment   = NSTextAlignmentRight;
     place.text            = [masterData_ placeType:placeType_];
 
     UIView *view = [[[UIView alloc] init] autorelease];
-    [view addSubview:label];
+    [view addSubview:yearlabel];
+    [view addSubview:sortLabel];
+    [view addSubview:titlesLabel];
     [view addSubview:place];
-    [label release];
+    [yearlabel release];
+    [sortLabel release];
+    [titlesLabel release];
     [place release];
 
     return view;

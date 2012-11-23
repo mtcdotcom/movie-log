@@ -37,9 +37,9 @@
                                                    otherButtonTitles:nil] autorelease];
             [alert show];
         }
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:NO completion:nil];
     }];
-    [self presentModalViewController:tweetViewController animated:YES];
+    [self presentViewController:tweetViewController animated:YES completion: nil];
     tweetViewController = nil;
 }
 
@@ -61,7 +61,7 @@
                          [self nilText:memo_]];
     [mailPicker setSubject:subject];
     [mailPicker setMessageBody:message isHTML:NO];
-    [self presentModalViewController:mailPicker animated:TRUE];
+    [self presentViewController:mailPicker animated:YES completion: nil];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
@@ -95,8 +95,8 @@
         default:
             break;
     }
-    
-    [self dismissModalViewControllerAnimated:YES];
+
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)mailAndTweet
@@ -243,7 +243,7 @@
             imagePicker.sourceType    = sourceType;
             imagePicker.delegate      = self;
             imagePicker.allowsEditing = YES;
-            [self presentModalViewController:imagePicker animated:YES];
+            [self presentViewController:imagePicker animated:YES completion: nil];
             break;
         }
         default:
@@ -253,7 +253,7 @@
 
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingImage:(UIImage*)image editingInfo:(NSDictionary*)editingInfo
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:NO completion:nil];
     [self dispPhoto:image];
     photoImage_ = image;
     [photoImage_ retain];
