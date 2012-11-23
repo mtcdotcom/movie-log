@@ -23,7 +23,7 @@
 #define TABLEVIEW_BGCOLOR HEXCOLOR(0xffffff)
 
 // テーブルビューセクションヘッダー背景色
-#define SECTION_BGCOLOR HEXCOLOR(0xa09d95)
+#define SECTION_BGCOLOR HEXCOLOR(0x484741)
 
 // 入力フィールド背景色
 #define INPUT_FILED_BGCOLOR HEXCOLOR(0xffffff)
