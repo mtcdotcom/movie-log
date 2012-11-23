@@ -49,6 +49,7 @@
     [super viewDidLoad];
 
 	self.title = @"作品情報";
+    self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = TABLEVIEW_BGCOLOR;
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemSave
