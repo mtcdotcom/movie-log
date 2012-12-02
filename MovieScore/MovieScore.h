@@ -14,16 +14,16 @@
 //
 
 // ナビゲーションバー背景色
-#define TINT_BGCOLOR HEXCOLOR(0x2b2b2e);
+#define TINT_BGCOLOR HEXCOLOR(0x201706);
 
 // ツールバー背景色
-#define TOOLBAR_TINT_BGCOLOR HEXCOLOR(0x2b2b2e)
+#define TOOLBAR_TINT_BGCOLOR HEXCOLOR(0x201706)
 
 // テーブルビュー背景色
 #define TABLEVIEW_BGCOLOR HEXCOLOR(0xffffff)
 
 // テーブルビューセクションヘッダー背景色
-#define SECTION_BGCOLOR HEXCOLOR(0x484741)
+#define SECTION_BGCOLOR HEXCOLOR(0x26190d)
 
 // 入力フィールド背景色
 #define INPUT_FILED_BGCOLOR HEXCOLOR(0xffffff)
@@ -42,16 +42,16 @@
 
 // セル テキスト
 #define CELL_TEXT_FONT [UIFont boldSystemFontOfSize:15]
-#define CELL_TEXT_COLOR HEXCOLOR(0x7b7f84)
+#define CELL_TEXT_COLOR HEXCOLOR(0x594B3F)
 
 // セル 詳細テキスト
 #define CELL_DETAIL_TEXT_FONT [UIFont boldSystemFontOfSize:17]
-#define CELL_DETAIL_TEXT_COLOR HEXCOLOR(0x414444)
+#define CELL_DETAIL_TEXT_COLOR HEXCOLOR(0x26190d)
 
 // セル 点数
-#define CELL_SCORE_FONT [UIFont boldSystemFontOfSize:21]
-#define CELL_SCORE_COLOR HEXCOLOR(0x414444)
+#define CELL_SCORE_FONT [UIFont boldSystemFontOfSize:22]
+#define CELL_SCORE_COLOR HEXCOLOR(0x26190d)
 
 // セル 詳細情報
 #define CELL_INFO_FONT [UIFont systemFontOfSize:10]
-#define CELL_INFO_COLOR HEXCOLOR(0x7b7f84)
+#define CELL_INFO_COLOR HEXCOLOR(0x594B3F)
