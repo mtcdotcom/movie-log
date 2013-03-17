@@ -15,7 +15,7 @@
 - (void)setSectionNameKeyScore;
 - (void)callRecordForUpdate:(NSIndexPath *)indexPath;
 - (NSString *)nilText:(NSString *)data;
-- (BOOL)isNotNil:(NSMutableString *)string;
+
 @end
 
 @implementation MovieList
@@ -85,7 +85,7 @@
                                                action:@selector(callRecord)] autorelease];
 
     self.tableView.backgroundColor = TABLEVIEW_BGCOLOR;
-    self.tableView.rowHeight = 67.0;
+    self.tableView.rowHeight = 84.0;
     
     self.navigationController.toolbar.tintColor = TOOLBAR_TINT_BGCOLOR;
     [self.navigationController setToolbarHidden:NO animated:NO];
@@ -177,12 +177,16 @@
     UILabel *scoreLabel;
     UILabel *infoLabel;
     UILabel *dateLabel;
-    float margin = 7.0;
-    float topLabelHeight    = 40.0;
-    float bottomLabelHeight = 20.0;
+    
+    UIImageView *photoView;
+    float leftMargin        = 8.0;
+    float photoMargin       = 70.0;
+    float topMargin         = 3.0;
+    float topLabelHeight    = 67.0;
+    float bottomLabelHeight = 17.0;
     float accessoryWidth    = 20.0;
-    float scoreLabelWidth   = 70.0;
-    float titleLabelWidth   = self.view.frame.size.width - scoreLabelWidth - accessoryWidth - margin;
+    float scoreLabelWidth   = 60.0;
+    float titleLabelWidth   = self.view.frame.size.width - scoreLabelWidth - accessoryWidth - photoMargin;
 
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
@@ -190,10 +194,27 @@
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin, margin, titleLabelWidth, topLabelHeight)];
-        scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin + titleLabelWidth, margin, scoreLabelWidth, topLabelHeight)];
-        infoLabel  = [[UILabel alloc] initWithFrame:CGRectMake(margin, topLabelHeight + margin, titleLabelWidth, bottomLabelHeight)];
-        dateLabel  = [[UILabel alloc] initWithFrame:CGRectMake(margin + titleLabelWidth, topLabelHeight + margin, scoreLabelWidth, bottomLabelHeight)];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(photoMargin,
+                                                               topMargin,
+                                                               titleLabelWidth,
+                                                               topLabelHeight)];
+        scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(photoMargin + titleLabelWidth,
+                                                               topMargin,
+                                                               scoreLabelWidth,
+                                                               topLabelHeight)];
+        infoLabel  = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin,
+                                                               topLabelHeight,
+                                                               photoMargin + titleLabelWidth - leftMargin,
+                                                               bottomLabelHeight)];
+        dateLabel  = [[UILabel alloc] initWithFrame:CGRectMake(photoMargin + titleLabelWidth,
+                                                               topLabelHeight,
+                                                               scoreLabelWidth,
+                                                               bottomLabelHeight)];
+        photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(
+                                                                   8.0,
+                                                                   8.0,
+                                                                   55.0,
+                                                                   55.0)] autorelease];
 
         titleLabel.textColor       = CELL_DETAIL_TEXT_COLOR;
         titleLabel.font            = CELL_DETAIL_TEXT_FONT;
@@ -218,21 +239,27 @@
         dateLabel.textAlignment    = NSTextAlignmentCenter;
         dateLabel.backgroundColor  = TABLEVIEW_BGCOLOR;
         dateLabel.tag = TAG_NO_DATE_LABEL;
-
+        
+        photoView.autoresizingMask = UIViewAutoresizingNone;
+        photoView.tag = 1111111;
+        
         [cell addSubview:dateLabel];
         [cell addSubview:titleLabel];
         [cell addSubview:scoreLabel];
         [cell addSubview:infoLabel];
+        [cell.contentView addSubview:photoView];
         
         [dateLabel  release];
         [titleLabel release];
         [scoreLabel release];
         [infoLabel  release];
+        [photoView  release];
 	} else {
         titleLabel = (UILabel *)[cell viewWithTag:TAG_NO_TITLE_LABEL];
         scoreLabel = (UILabel *)[cell viewWithTag:TAG_NO_SCORE_LABE];
         infoLabel  = (UILabel *)[cell viewWithTag:TAG_NO_INFO_LABEL];
         dateLabel  = (UILabel *)[cell viewWithTag:TAG_NO_DATE_LABEL];
+        photoView  = (UIImageView *)[cell viewWithTag:1111111];
     }
 
     NSManagedObject *managedObject = [modelManager_ fetchObject:@"Movies"
@@ -250,21 +277,17 @@
                       [self nilText:[managedObject valueForKey:@"place"]]
                       ];
     dateLabel.text  = [formatter stringFromDate:[managedObject valueForKey:@"timeStamp"]];
-
+    UIImage *image = [UIImage imageWithContentsOfFile:[managedObject valueForKey:@"photo"]];
+    photoView.image = image;
+    
 	return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSManagedObject *managedObject = [modelManager_ fetchObject:@"Movies" WithRow:0 AndSection:section];
-    
-    NSString *yearlabelText     = [[[NSString alloc] init] autorelease];
+
     NSString *sortLabelText     = [[[NSString alloc] init] autorelease];
-    NSString *titlesLabelText   = [[[NSString alloc] init] autorelease];
-    
-    yearlabelText   = [NSString stringWithFormat:@"   %@ 年", year_];
-    titlesLabelText = [NSString stringWithFormat:@"作品数 : %@",
-                       [countDict_ objectForKey:[NSNumber numberWithInt:section]]];
 
     switch(sortType_) {
         case SORT_TYPE_SCORE:
@@ -285,7 +308,7 @@
     yearlabel.backgroundColor   = SECTION_BGCOLOR;
     yearlabel.textColor         = SECTION_COLOR;
     yearlabel.font              = SECTION_FONT;
-    yearlabel.text              = yearlabelText;
+    yearlabel.text              = [NSString stringWithFormat:@"   %@ 年", year_];
 
     UILabel *sortLabel = [[UILabel alloc] initWithFrame:CGRectMake(70.0, 0.0, 40.0, 22.0)];
     sortLabel.backgroundColor   = SECTION_BGCOLOR;
@@ -299,7 +322,7 @@
     titlesLabel.textColor       = SECTION_COLOR;
     titlesLabel.font            = SECTION_FONT;
     titlesLabel.textAlignment   = NSTextAlignmentLeft;
-    titlesLabel.text            = titlesLabelText;
+    titlesLabel.text            = [NSString stringWithFormat:@"作品数 : %@", [countDict_ objectForKey:[NSNumber numberWithInt:section]]];;
 
     UILabel *place = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 70.0, 0.0, 60.0, 22.0)];
     place.backgroundColor = SECTION_BGCOLOR;
@@ -447,19 +470,10 @@
 
 - (NSString *)nilText:(NSMutableString *)string
 {
-    if ([self isNotNil:string]) {
+    if (string && [string length] > 0) {
         return string;
     } else {
         return @"設定なし";
-    }
-}
-
-- (BOOL)isNotNil:(NSMutableString *)string
-{
-    if (string && [string length] > 0) {
-        return TRUE;
-    } else {
-        return FALSE;
     }
 }
 

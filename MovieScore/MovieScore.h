@@ -49,7 +49,7 @@
 #define CELL_DETAIL_TEXT_COLOR HEXCOLOR(0x26190d)
 
 // セル 点数
-#define CELL_SCORE_FONT [UIFont boldSystemFontOfSize:22]
+#define CELL_SCORE_FONT [UIFont boldSystemFontOfSize:23]
 #define CELL_SCORE_COLOR HEXCOLOR(0x26190d)
 
 // セル 詳細情報

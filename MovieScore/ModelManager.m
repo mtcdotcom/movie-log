@@ -159,14 +159,19 @@
         [fetchRequest setSortDescriptors:sortDescriptors];
     }
 
+    NSMutableArray* predicateArray = [NSMutableArray array];
     if (year_) {
-        [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"year = %@", year_]];
+        [predicateArray addObject: [NSPredicate predicateWithFormat: @"year = %@", year_]];
     }
     if (place_) {
-        [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"place != nil"]];
-        [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"place = %@", place_]];
+        [predicateArray addObject: [NSPredicate predicateWithFormat: @"place != nil"]];
+        [predicateArray addObject: [NSPredicate predicateWithFormat: @"place = %@", place_]];
     }
-
+    NSPredicate* predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicateArray];
+    [fetchRequest setPredicate:predicate];
+    
+    [NSFetchedResultsController deleteCacheWithName:[NSString stringWithFormat:@"cache%@_%@", year_, place_]];
+    
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc]
                                                              initWithFetchRequest:fetchRequest
                                                              managedObjectContext:self.managedObjectContext

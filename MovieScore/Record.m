@@ -292,6 +292,7 @@
                               constrainedToSize:bounds
                                   lineBreakMode:NSLineBreakByCharWrapping];
             height = size.height > 132.0 ? size.height + 20.0 : 132.0;
+            height = height * 1.15;
             break;
         }
         default:

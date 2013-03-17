@@ -123,7 +123,7 @@
 - (void)dispImage:image
 {
     UIImageView *photo = [[[UIImageView alloc]
-                           initWithFrame:CGRectMake(185.0, 10, 112.0, 112.0)] autorelease];
+                           initWithFrame:CGRectMake(185.0, 10.0, 112.0, 112.0)] autorelease];
     photo.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     photo.image = image;
     photo.tag = TAG_NO_PHOTO;
