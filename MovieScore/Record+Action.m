@@ -16,9 +16,6 @@
     if (!twClass) {
         return;
     }
-
-    //TWTweetComposeViewController *tweetViewController = [[[TWTweetComposeViewController alloc] init] autorelease];
-    
     SLComposeViewController *twclass = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     
     NSString *tweetTxt  = [NSString stringWithFormat:

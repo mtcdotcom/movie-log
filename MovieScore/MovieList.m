@@ -171,8 +171,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-
     UILabel *titleLabel;
     UILabel *scoreLabel;
     UILabel *infoLabel;
@@ -188,10 +186,10 @@
     float scoreLabelWidth   = 60.0;
     float titleLabelWidth   = self.view.frame.size.width - scoreLabelWidth - accessoryWidth - photoMargin;
 
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
 
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
         titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(photoMargin,
@@ -210,11 +208,7 @@
                                                                topLabelHeight,
                                                                scoreLabelWidth,
                                                                bottomLabelHeight)];
-        photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(
-                                                                   8.0,
-                                                                   8.0,
-                                                                   55.0,
-                                                                   55.0)] autorelease];
+        photoView = [[UIImageView alloc] initWithFrame:CGRectMake(8.0, 8.0, 55.0, 55.0)];
 
         titleLabel.textColor       = CELL_DETAIL_TEXT_COLOR;
         titleLabel.font            = CELL_DETAIL_TEXT_FONT;
@@ -241,7 +235,7 @@
         dateLabel.tag = TAG_NO_DATE_LABEL;
         
         photoView.autoresizingMask = UIViewAutoresizingNone;
-        photoView.tag = 1111111;
+        photoView.tag = TAG_NO_PHOTO_LABEL;
         
         [cell addSubview:dateLabel];
         [cell addSubview:titleLabel];
@@ -259,7 +253,7 @@
         scoreLabel = (UILabel *)[cell viewWithTag:TAG_NO_SCORE_LABE];
         infoLabel  = (UILabel *)[cell viewWithTag:TAG_NO_INFO_LABEL];
         dateLabel  = (UILabel *)[cell viewWithTag:TAG_NO_DATE_LABEL];
-        photoView  = (UIImageView *)[cell viewWithTag:1111111];
+        photoView  = (UIImageView *)[cell viewWithTag:TAG_NO_PHOTO_LABEL];
     }
 
     NSManagedObject *managedObject = [modelManager_ fetchObject:@"Movies"
@@ -277,7 +271,22 @@
                       [self nilText:[managedObject valueForKey:@"place"]]
                       ];
     dateLabel.text  = [formatter stringFromDate:[managedObject valueForKey:@"timeStamp"]];
-    UIImage *image = [UIImage imageWithContentsOfFile:[managedObject valueForKey:@"photo"]];
+    
+    NSString *tmp_path;
+    if (![[[managedObject valueForKey:@"photo"] substringToIndex:1] isEqualToString:@"~"]) {
+        NSRange rangeLib = [[managedObject valueForKey:@"photo"] rangeOfString:@"/Documents/"];
+        if (rangeLib.location != NSNotFound) {
+            tmp_path = [[NSString stringWithFormat:@"~/Documents/%@",
+                         [[managedObject valueForKey:@"photo"] substringFromIndex:rangeLib.location + rangeLib.length]]
+                        stringByExpandingTildeInPath];
+        } else {
+            tmp_path = [[managedObject valueForKey:@"photo"] stringByExpandingTildeInPath];
+        }
+    } else {
+        tmp_path = [[managedObject valueForKey:@"photo"] stringByExpandingTildeInPath];
+    }
+    UIImage *image = [UIImage imageWithContentsOfFile:tmp_path];
+
     photoView.image = image;
     
 	return cell;

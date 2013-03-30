@@ -57,7 +57,7 @@
     NSString* imagePath = [self getImageFilepath];
     NSData* data = UIImageJPEGRepresentation(photoImage_, 0.5);
     [data writeToFile:imagePath atomically:NO];
-    [managedObject setValue:imagePath forKey:@"photo"];
+    [managedObject setValue:[imagePath stringByAbbreviatingWithTildeInPath] forKey:@"photo"];
 }
 
 - (void)insert

@@ -130,7 +130,34 @@
         [modelManager release];
 
         if ([self isNotNil:photo_]) {
-            UIImage *image = [UIImage imageWithContentsOfFile:photo_];
+//            if (![[photo_ substringToIndex:1] isEqualToString:@"~"]) {
+//                NSRegularExpression *regexp = [NSRegularExpression
+//                                               regularExpressionWithPattern:@".*(/Documents/.*)"
+//                                               options:NSRegularExpressionCaseInsensitive
+//                                               error:nil];
+//                NSTextCheckingResult *match = [regexp
+//                                               firstMatchInString:photo_
+//                                               options:0
+//                                               range:NSMakeRange(0, photo_.length)];
+//                if (match.numberOfRanges) {
+//                    NSLog(@"%@", [photo_ substringWithRange:[match rangeAtIndex:0]]);
+//                    NSLog(@"~%@", [photo_ substringWithRange:[match rangeAtIndex:1]]);
+//                }
+//            }
+            NSString *tmp_path;
+            if (![[photo_ substringToIndex:1] isEqualToString:@"~"]) {
+                NSRange rangeLib = [photo_ rangeOfString:@"/Documents/"];
+                if (rangeLib.location != NSNotFound) {
+                    tmp_path = [[NSString stringWithFormat:@"~/Documents/%@",
+                                  [photo_ substringFromIndex:rangeLib.location + rangeLib.length]]
+                                 stringByExpandingTildeInPath];
+                } else {
+                    tmp_path = [photo_ stringByExpandingTildeInPath];
+                }
+            } else {
+                tmp_path = [photo_ stringByExpandingTildeInPath];
+            }
+            UIImage *image = [UIImage imageWithContentsOfFile:tmp_path];
             [self dispPhoto:image];
             photoImage_ = image;
             [photoImage_ retain];
