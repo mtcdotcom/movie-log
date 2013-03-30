@@ -17,18 +17,21 @@
         return;
     }
 
-    TWTweetComposeViewController *tweetViewController = [[[TWTweetComposeViewController alloc] init] autorelease];
+    //TWTweetComposeViewController *tweetViewController = [[[TWTweetComposeViewController alloc] init] autorelease];
+    
+    SLComposeViewController *twclass = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    
     NSString *tweetTxt  = [NSString stringWithFormat:
                            @"『%@』 %@",
                            [self nilText:mtitle_],
                            [self emptyText:memo_]
                            ];
-    [tweetViewController setInitialText:tweetTxt];
+    [twclass setInitialText:tweetTxt];
     if  (isLoadPhoto_) {
-        [tweetViewController addImage:photoImage_];
+        [twclass addImage:photoImage_];
     }
-    [tweetViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
-        if (result == TWTweetComposeViewControllerResultDone) {
+    [twclass setCompletionHandler:^(SLComposeViewControllerResult result) {
+        if (result == SLComposeViewControllerResultDone) {
             NSString *message = @"Tweet成功";
             UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:nil 
                                                              message:message
@@ -39,8 +42,8 @@
         }
         [self dismissViewControllerAnimated:NO completion:nil];
     }];
-    [self presentViewController:tweetViewController animated:YES completion: nil];
-    tweetViewController = nil;
+    [self presentViewController:twclass animated:YES completion: nil];
+    twclass = nil;
 }
 
 - (void)sendMail

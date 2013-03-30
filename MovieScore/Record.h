@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Twitter/Twitter.h>
+#import <Social/Social.h>
 #import <MessageUI/MessageUI.h>
 #import "QuartzCore/CALayer.h"
 #import "MovieScore.h"

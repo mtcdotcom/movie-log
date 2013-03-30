@@ -12,6 +12,7 @@
 		840C1CA214E7750000D3EE8F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 840C1CA014E7750000D3EE8F /* InfoPlist.strings */; };
 		840C1CB114EA8F2D00D3EE8F /* SummaryDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 840C1CB014EA8F2D00D3EE8F /* SummaryDetail.m */; };
 		840C1CB414EA9C4A00D3EE8F /* nophoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 840C1CB314EA9C4A00D3EE8F /* nophoto.png */; };
+		841CCB5B16F55AF100EF8D8D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841CCB5A16F55AF100EF8D8D /* Social.framework */; };
 		8448721913B3140D00B0C7C6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8448721713B3140D00B0C7C6 /* Model.xcdatamodeld */; };
 		844C4F6014B87D8F00C36424 /* Summary.m in Sources */ = {isa = PBXBuildFile; fileRef = 844C4F5F14B87D8F00C36424 /* Summary.m */; };
 		8471974514BADB6E00A723A9 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471974414BADB6E00A723A9 /* Record.m */; };
@@ -47,6 +48,7 @@
 		840C1CAF14EA8F2D00D3EE8F /* SummaryDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryDetail.h; sourceTree = "<group>"; };
 		840C1CB014EA8F2D00D3EE8F /* SummaryDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryDetail.m; sourceTree = "<group>"; };
 		840C1CB314EA9C4A00D3EE8F /* nophoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nophoto.png; sourceTree = "<group>"; };
+		841CCB5A16F55AF100EF8D8D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8448721813B3140D00B0C7C6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		844C4F5E14B87D8E00C36424 /* Summary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Summary.h; sourceTree = "<group>"; };
 		844C4F5F14B87D8F00C36424 /* Summary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Summary.m; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841CCB5B16F55AF100EF8D8D /* Social.framework in Frameworks */,
 				84F0D36B14DE1A7100836C57 /* QuartzCore.framework in Frameworks */,
 				84C94BDE14CF05B900143E74 /* MessageUI.framework in Frameworks */,
 				84C94BC814CD8CD300143E74 /* Twitter.framework in Frameworks */,
@@ -126,6 +129,7 @@
 		847E6FFA137ACF6200B1141B = {
 			isa = PBXGroup;
 			children = (
+				841CCB5A16F55AF100EF8D8D /* Social.framework */,
 				84ED2024165F377100A2CBAC /* Default-568h@2x.png */,
 				84F8BE76152D81290075777D /* Icon@2x.png */,
 				84F8BE74152D81250075777D /* Icon.png */,
@@ -368,7 +372,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MovieScore/MovieScore-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "MovieScore/MovieScore-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "84A94825-9AD1-436B-84AA-72E2269637BF";
@@ -402,7 +406,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Takeshi Mutou";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -424,7 +428,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MovieScore/MovieScore-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "MovieScore/MovieScore-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=*]" = "";
@@ -443,7 +447,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MovieScore/MovieScore-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "MovieScore/MovieScore-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "84A94825-9AD1-436B-84AA-72E2269637BF";
