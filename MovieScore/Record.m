@@ -315,9 +315,12 @@
         {
             UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
             CGSize bounds = CGSizeMake(self.tableView.frame.size.width, self.tableView.frame.size.height);
-            CGSize size   = [memo_ sizeWithFont:cell.textLabel.font
-                              constrainedToSize:bounds
-                                  lineBreakMode:NSLineBreakByCharWrapping];
+            UIFont *font = cell.textLabel.font;
+            CGRect rect = [cell.textLabel.text boundingRectWithSize:bounds
+                                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                                         attributes:@{NSFontAttributeName:font}
+                                                            context:nil];
+            CGSize size = rect.size;
             height = size.height > 132.0 ? size.height + 20.0 : 132.0;
             height = height * 1.15;
             break;

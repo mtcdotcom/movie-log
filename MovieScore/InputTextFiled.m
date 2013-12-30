@@ -41,6 +41,14 @@
 
 #pragma mark - View lifecycle
 
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+#endif
+}
+
 - (void)loadView
 {
     [super loadView];
@@ -79,8 +87,7 @@
     textField_.textColor       = CELL_DETAIL_TEXT_COLOR;
     textField_.backgroundColor = INPUT_FILED_BGCOLOR;
     textField_.clearButtonMode = UITextFieldViewModeAlways;
-    textField_.borderStyle     = UITextBorderStyleRoundedRect
-    ;
+    textField_.borderStyle     = UITextBorderStyleRoundedRect;
     textField_.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
     [textField_ becomeFirstResponder];
@@ -104,6 +111,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button.frame = CGRectMake(self.view.frame.size.width - 122.0, toolbarY, 100.0, 33.0);
     button.tag   = BUTTON_TAG_NO;
+    button.titleLabel.font = BUTTON_FONT;
     [button setTitle:@"OK" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:button];

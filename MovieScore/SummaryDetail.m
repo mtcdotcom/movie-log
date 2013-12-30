@@ -47,8 +47,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.navigationController.navigationBar.tintColor = TINT_BGCOLOR;
+
     self.tableView.backgroundColor = TABLEVIEW_BGCOLOR;
     self.tableView.rowHeight = 36;
     self.tableView.allowsSelection = NO;
@@ -60,8 +59,7 @@
     NSArray *titles = [NSArray arrayWithObjects: @"点数", @"月", @"制作国", @"ジャンル", @"場所", nil];
     
     UISegmentedControl *segmentCtl = [[[UISegmentedControl alloc] initWithItems:titles] autorelease];
-    segmentCtl.frame = CGRectMake(0.0, 0.0, 310.0, 30.0);
-    segmentCtl.segmentedControlStyle = UISegmentedControlStyleBar;
+    segmentCtl.frame = CGRectMake(0.0, 0.0, 290.0, 30.0);
     [segmentCtl addTarget:self action:@selector(listSegmentedControl:) forControlEvents:UIControlEventValueChanged];
     
     UIBarButtonItem *segmentBarItem = [[[UIBarButtonItem alloc] initWithCustomView:segmentCtl] autorelease];

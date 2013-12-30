@@ -72,9 +72,12 @@
 
     self.title = @"サマリー";
 
-    self.navigationController.navigationBar.tintColor = TINT_BGCOLOR;
+    self.navigationController.navigationBar.barTintColor = TINT_BGCOLOR;
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    self.navigationController.navigationBar.tintColor = TINT_COLOR;
     self.tableView.backgroundColor = TABLEVIEW_BGCOLOR;
-    self.tableView.rowHeight = 36;
+    self.tableView.rowHeight = 38;
     self.tableView.allowsSelection = NO;
 
     [self setToolbar];

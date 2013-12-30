@@ -235,7 +235,8 @@
             if (![UIImagePickerController isSourceTypeAvailable:sourceType]) {  
                 return;
             }
-            if (sourceType == 99) {
+            if (!(sourceType == UIImagePickerControllerSourceTypeCamera ||
+                    sourceType == UIImagePickerControllerSourceTypePhotoLibrary)) {
                 return;
             }
             UIImagePickerController *imagePicker;

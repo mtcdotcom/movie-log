@@ -72,8 +72,16 @@
     [modelManager_ fetchedResultsController:@"Movies"].delegate = self;
 
 	self.title = @"作品リスト";
+    
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
 
-    self.navigationController.navigationBar.tintColor = TINT_BGCOLOR;
+    self.navigationController.navigationBar.barTintColor = TINT_BGCOLOR;
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    self.navigationController.navigationBar.tintColor = TINT_COLOR;
+    
 	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
                                               initWithTitle:@"期間選択" style:UIBarButtonItemStyleBordered
                                               target:self
@@ -87,10 +95,18 @@
     self.tableView.backgroundColor = TABLEVIEW_BGCOLOR;
     self.tableView.rowHeight = 84.0;
     
-    self.navigationController.toolbar.tintColor = TOOLBAR_TINT_BGCOLOR;
+    self.navigationController.toolbar.barTintColor = TOOLBAR_TINT_BGCOLOR;
+    self.navigationController.toolbar.tintColor = TINT_COLOR;
+    self.navigationController.toolbar.translucent = NO;
     [self.navigationController setToolbarHidden:NO animated:NO];
     
     [self setToolbar];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    // ステータスバーの文字色を白に指定
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidUnload
