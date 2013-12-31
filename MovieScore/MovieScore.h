@@ -14,13 +14,13 @@
 //
 
 // ナビゲーションバー背景色
-#define TINT_BGCOLOR HEXCOLOR(0x43342c);
+#define TINT_BGCOLOR HEXCOLOR(0x241c18);
 
 // ツールバー背景色
 #define TINT_COLOR HEXCOLOR(0xffffff)
 
 // ツールバー背景色
-#define TOOLBAR_TINT_BGCOLOR HEXCOLOR(0x43342c)
+#define TOOLBAR_TINT_BGCOLOR HEXCOLOR(0x241c18)
 
 // テーブルビュー背景色
 #define TABLEVIEW_BGCOLOR HEXCOLOR(0xffffff)
