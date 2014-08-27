@@ -43,7 +43,7 @@ static MasterData* sharedHistory = nil;
 	return self;
 }
 
-- (unsigned)retainCount
+- (unsigned long)retainCount
 {
 	return UINT_MAX;
 }

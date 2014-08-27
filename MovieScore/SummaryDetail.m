@@ -237,7 +237,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    int number = 0;
+    long int number = 0;
     switch (listType_) {
         case LIST_TYPE_SCORE:
             number = scoreDict_.count;

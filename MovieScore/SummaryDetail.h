@@ -21,7 +21,7 @@
 @interface SummaryDetail : UITableViewController <NSFetchedResultsControllerDelegate>
 {
     BOOL isload_;
-    int listType_;
+    long int listType_;
     int placeType_;
     NSString* year_;
     NSMutableDictionary* scoreDict_;

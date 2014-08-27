@@ -229,7 +229,7 @@
                 case TABLE_VIEW_ROW_TOTAL_COUNT:
                 {
                     cell.textLabel.text       = @"本数";
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d 本", total_];
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld 本", total_];
                     break;
                 }
                 case TABLE_VIEW_ROW_TOTAL_TIME:

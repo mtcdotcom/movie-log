@@ -180,8 +180,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    int count = [modelManager_ countObjects:@"Movies" section:section];
-    [countDict_ setObject:[NSNumber numberWithInt:count] forKey:[NSNumber numberWithInt:section]];
+    long int count = [modelManager_ countObjects:@"Movies" section:section];
+    [countDict_ setObject:[NSNumber numberWithLong:count] forKey:[NSNumber numberWithLong:section]];
     return count;
 }
 
@@ -347,7 +347,7 @@
     titlesLabel.textColor       = SECTION_COLOR;
     titlesLabel.font            = SECTION_FONT;
     titlesLabel.textAlignment   = NSTextAlignmentLeft;
-    titlesLabel.text            = [NSString stringWithFormat:@"作品数 : %@", [countDict_ objectForKey:[NSNumber numberWithInt:section]]];;
+    titlesLabel.text            = [NSString stringWithFormat:@"作品数 : %@", [countDict_ objectForKey:[NSNumber numberWithLong:section]]];;
 
     UILabel *place = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 70.0, 0.0, 60.0, 22.0)];
     place.backgroundColor = SECTION_BGCOLOR;

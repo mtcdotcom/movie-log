@@ -27,7 +27,7 @@
 {
     BOOL isload_;
     int placeType_;
-    int total_;
+    long int total_;
     int totalTime_;
     int totalAmount_;
     float totalScore_;
