@@ -161,7 +161,9 @@
 
     NSMutableArray* predicateArray = [NSMutableArray array];
     if (year_) {
-        [predicateArray addObject: [NSPredicate predicateWithFormat: @"year = %@", year_]];
+        if (! [year_ isEqualToString:@"すべて"]) {
+            [predicateArray addObject: [NSPredicate predicateWithFormat: @"year = %@", year_]];
+        }
     }
     if (place_) {
         [predicateArray addObject: [NSPredicate predicateWithFormat: @"place != nil"]];
@@ -228,6 +230,11 @@
 - (NSInteger)countSections:(NSString *)entityName
 {
 	return [[[self fetchedResultsController:entityName] sections] count];	
+}
+
+- (NSArray *)fetchSections:(NSString *)entityName
+{
+    return [[self fetchedResultsController:entityName] sections];
 }
 
 - (NSManagedObject *)createNewObject:(NSString *)entityName

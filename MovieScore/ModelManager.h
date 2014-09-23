@@ -35,6 +35,7 @@
 - (NSInteger)countObjects:(NSString *)entityName;
 - (NSInteger)countObjects:(NSString *)entityName section:(NSInteger)section;
 - (NSInteger)countSections:(NSString *)entityName;
+- (NSArray *)fetchSections:(NSString *)entityName;
 - (NSManagedObject *)createNewObject:(NSString *)entityName;
 - (void)saveContext;
 - (void)deleteObject:(NSString *)entityName WithRow:(NSInteger)row AndSection:(NSInteger)section;

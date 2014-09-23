@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#define PLACE_TYPE_NEW  0
-#define PLACE_TYPE_OLD  1
-#define PLACE_TYPE_ALL  2
+#define PLACE_TYPE_NEW          0
+#define PLACE_TYPE_OLD          1
+#define PLACE_TYPE_DVD_BLURAY   2
+#define PLACE_TYPE_ALL          3
 
 @interface MasterData : NSObject
 

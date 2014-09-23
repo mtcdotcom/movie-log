@@ -13,7 +13,7 @@
 #import "Term.h"
 
 #define LIST_TYPE_SCORE   0
-#define LIST_TYPE_MONTH   1
+#define LIST_TYPE_TERM    1
 #define LIST_TYPE_COUNTRY 2
 #define LIST_TYPE_GENRE   3
 #define LIST_TYPE_PLACE   4
@@ -24,7 +24,9 @@
     long int listType_;
     int placeType_;
     NSString* year_;
+    NSArray* years_;
     NSMutableDictionary* scoreDict_;
+    NSMutableDictionary* yearDict_;
     NSMutableDictionary* monthDict_;
     NSMutableDictionary* countryDict_;
     NSMutableDictionary* genreDict_;

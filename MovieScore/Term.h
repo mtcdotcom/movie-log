@@ -14,6 +14,8 @@
 
 @interface Term : UITableViewController<NSFetchedResultsControllerDelegate>
 {
+  @private
+    long termCount_;
     ModelManager *modelManager_;
     id<TermDelegate> delegate_;
 }

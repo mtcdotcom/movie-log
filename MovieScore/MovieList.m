@@ -308,6 +308,11 @@
 	return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 22;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSManagedObject *managedObject = [modelManager_ fetchObject:@"Movies" WithRow:0 AndSection:section];
@@ -330,10 +335,23 @@
     }
     
     UILabel *yearlabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 22.0)];
-    yearlabel.backgroundColor   = SECTION_BGCOLOR;
-    yearlabel.textColor         = SECTION_COLOR;
-    yearlabel.font              = SECTION_FONT;
-    yearlabel.text              = [NSString stringWithFormat:@"   %@ 年", year_];
+    yearlabel.backgroundColor = SECTION_BGCOLOR;
+    yearlabel.textColor       = SECTION_COLOR;
+    yearlabel.font            = SECTION_FONT;
+    if ([year_ isEqualToString:@"すべて"]) {
+        switch(sortType_) {
+            case SORT_TYPE_SCORE:
+                yearlabel.text = [NSString stringWithFormat:@"  すべて "];
+                break;
+            case SORT_TYPE_MONTH:
+                yearlabel.text = [NSString stringWithFormat:@"   %d 年", [[managedObject valueForKey:@"year"] intValue]];
+                break;
+            default:
+                break;
+        }
+    } else {
+        yearlabel.text = [NSString stringWithFormat:@"   %@ 年", year_];
+    }
 
     UILabel *sortLabel = [[UILabel alloc] initWithFrame:CGRectMake(70.0, 0.0, 40.0, 22.0)];
     sortLabel.backgroundColor   = SECTION_BGCOLOR;
@@ -349,7 +367,7 @@
     titlesLabel.textAlignment   = NSTextAlignmentLeft;
     titlesLabel.text            = [NSString stringWithFormat:@"作品数 : %@", [countDict_ objectForKey:[NSNumber numberWithLong:section]]];;
 
-    UILabel *place = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 70.0, 0.0, 60.0, 22.0)];
+    UILabel *place = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 105.0, 0.0, 95.0, 22.0)];
     place.backgroundColor = SECTION_BGCOLOR;
     place.textColor       = SECTION_COLOR;
     place.font            = SECTION_FONT;
@@ -411,9 +429,10 @@
     actionSheet.tag = TAG_NO_SELECT_ACTION;
     [actionSheet addButtonWithTitle:@"新作のみ"];
     [actionSheet addButtonWithTitle:@"旧作のみ"];
+    [actionSheet addButtonWithTitle:@"DVD・Blu-ray"];
     [actionSheet addButtonWithTitle:@"すべて"];
     [actionSheet addButtonWithTitle:@"キャンセル"];
-    actionSheet.cancelButtonIndex = 3;
+    actionSheet.cancelButtonIndex = 4;
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
     [actionSheet showInView:self.view.window];
 }
@@ -441,6 +460,9 @@
                     break;
                 case PLACE_TYPE_OLD:
                     placeType_ = PLACE_TYPE_OLD;
+                    break;
+                case PLACE_TYPE_DVD_BLURAY:
+                    placeType_ = PLACE_TYPE_DVD_BLURAY;
                     break;
                 case PLACE_TYPE_ALL:
                     placeType_ = PLACE_TYPE_ALL;

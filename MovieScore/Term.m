@@ -93,7 +93,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [modelManager_ countSections:@"Movies"];
+    termCount_ = [modelManager_ countSections:@"Movies"];
+    return termCount_ + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,9 +106,13 @@
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:CellIdentifier] autorelease];
 	}
-    NSManagedObject *managedObject = [modelManager_ fetchObject:@"Movies" WithRow:0 AndSection:indexPath.row];
-    NSString *year = [managedObject valueForKey:@"year"];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@年", year];
+    if (indexPath.row <termCount_) {
+        NSManagedObject *managedObject = [modelManager_ fetchObject:@"Movies" WithRow:0 AndSection:indexPath.row];
+        NSString *year = [managedObject valueForKey:@"year"];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@年", year];
+    } else {
+        cell.textLabel.text = @"すべて";
+    }
     cell.textLabel.textColor = CELL_DETAIL_TEXT_COLOR;
     cell.textLabel.font      = CELL_DETAIL_TEXT_FONT;
 	return cell;

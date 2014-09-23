@@ -130,20 +130,6 @@
         [modelManager release];
 
         if ([self isNotNil:photo_]) {
-//            if (![[photo_ substringToIndex:1] isEqualToString:@"~"]) {
-//                NSRegularExpression *regexp = [NSRegularExpression
-//                                               regularExpressionWithPattern:@".*(/Documents/.*)"
-//                                               options:NSRegularExpressionCaseInsensitive
-//                                               error:nil];
-//                NSTextCheckingResult *match = [regexp
-//                                               firstMatchInString:photo_
-//                                               options:0
-//                                               range:NSMakeRange(0, photo_.length)];
-//                if (match.numberOfRanges) {
-//                    NSLog(@"%@", [photo_ substringWithRange:[match rangeAtIndex:0]]);
-//                    NSLog(@"~%@", [photo_ substringWithRange:[match rangeAtIndex:1]]);
-//                }
-//            }
             NSString *tmp_path;
             if (![[photo_ substringToIndex:1] isEqualToString:@"~"]) {
                 NSRange rangeLib = [photo_ rangeOfString:@"/Documents/"];

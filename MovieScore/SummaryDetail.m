@@ -56,7 +56,12 @@
     
     listType_ = LIST_TYPE_SCORE;
     
-    NSArray *titles = [NSArray arrayWithObjects: @"点数", @"月", @"制作国", @"ジャンル", @"場所", nil];
+    NSArray *titles;
+    if ([year_ isEqualToString:@"すべて"]) {
+        titles = [NSArray arrayWithObjects: @"点数", @"年", @"制作国", @"ジャンル", @"場所", nil];
+    } else {
+        titles = [NSArray arrayWithObjects: @"点数", @"月", @"制作国", @"ジャンル", @"場所", nil];
+    }
     
     UISegmentedControl *segmentCtl = [[[UISegmentedControl alloc] initWithItems:titles] autorelease];
     segmentCtl.frame = CGRectMake(0.0, 0.0, 290.0, 30.0);
@@ -75,6 +80,7 @@
 - (void)viewDidUnload
 {
     [scoreDict_   release];
+    [yearDict_    release];
     [monthDict_   release];
     [countryDict_ release];
     [genreDict_   release];
@@ -82,6 +88,7 @@
     [masterData_  release];
     
     scoreDict_   = nil;
+    yearDict_    = nil;
     monthDict_   = nil;
     countryDict_ = nil;
     genreDict_   = nil;
@@ -94,6 +101,7 @@
 - (void)dealloc
 {
     [scoreDict_   release];
+    [yearDict_    release];
     [monthDict_   release];
     [countryDict_ release];
     [genreDict_   release];
@@ -145,10 +153,19 @@
         [scoreDict_ setObject:[NSNumber numberWithInt:0] forKey:[scores objectAtIndex:i]];
     }
     
-    NSArray *months = masterData_.monthDatas;
-    monthDict_ = [[NSMutableDictionary alloc] init];
-    for (i = 0; i < [months count]; i++) {
-        [monthDict_ setObject:[NSNumber numberWithInt:0] forKey:[months objectAtIndex:i]];
+    if ([year_ isEqualToString:@"すべて"]) {
+        ModelManager *modelManager = [[ModelManager alloc] initWithsectionNameKey:@"year"];
+        years_ = [modelManager fetchSections:@"Movies"];
+        yearDict_ = [[NSMutableDictionary alloc] init];
+        for (i = 0; i < [years_ count]; i++) {
+            [yearDict_ setObject:[NSNumber numberWithInt:0] forKey:[[years_ objectAtIndex:i] name]];
+        }
+    } else {
+        NSArray *months = masterData_.monthDatas;
+        monthDict_ = [[NSMutableDictionary alloc] init];
+        for (i = 0; i < [months count]; i++) {
+            [monthDict_ setObject:[NSNumber numberWithInt:0] forKey:[months objectAtIndex:i]];
+        }
     }
     
     NSArray *countries = masterData_.countryDatas;
@@ -188,11 +205,20 @@
             [scoreDict_ setObject:[NSNumber numberWithInt:count] forKey:data];
         }
         
-        data = [managedObject valueForKey:@"month"];
-        if (data) {
-            count = [[monthDict_ objectForKey:data] intValue];
-            count++;
-            [monthDict_ setObject:[NSNumber numberWithInt:count] forKey:data];
+        if ([year_ isEqualToString:@"すべて"]) {
+            data = [managedObject valueForKey:@"year"];
+            if (data) {
+                count = [[yearDict_ objectForKey:data] intValue];
+                count++;
+                [yearDict_ setObject:[NSNumber numberWithInt:count] forKey:data];
+            }
+        } else {
+            data = [managedObject valueForKey:@"month"];
+            if (data) {
+                count = [[monthDict_ objectForKey:data] intValue];
+                count++;
+                [monthDict_ setObject:[NSNumber numberWithInt:count] forKey:data];
+            }
         }
         
         data = [managedObject valueForKey:@"country"];
@@ -242,8 +268,12 @@
         case LIST_TYPE_SCORE:
             number = scoreDict_.count;
             break;
-        case LIST_TYPE_MONTH:
-            number = monthDict_.count;
+        case LIST_TYPE_TERM:
+            if ([year_ isEqualToString:@"すべて"]) {
+                number = yearDict_.count;
+            } else {
+                number = monthDict_.count;
+            }
             break;
         case LIST_TYPE_COUNTRY:
             number = countryDict_.count;
@@ -286,16 +316,25 @@
                               [[scoreDict_ objectForKey:[masterData_.scoreDatas objectAtIndex:indexPath.row]] intValue]];
             }
             break;
-        case LIST_TYPE_MONTH:
-            month = [[masterData_.monthDatas objectAtIndex:indexPath.row] intValue];
-            if (month < 10) {
-                text = [NSString stringWithFormat:@"  %d 月", month];
+        case LIST_TYPE_TERM:
+            if ([year_ isEqualToString:@"すべて"]) {
+                if ([years_ count] > indexPath.row) {
+                    text = [NSString stringWithFormat:@"%@ 年", [[years_ objectAtIndex:indexPath.row] name]];
+                    detailText = [NSString stringWithFormat:@"%d 本",
+                                  [[yearDict_ objectForKey:[[years_ objectAtIndex:indexPath.row] name]] intValue]];
+                }
+                break;
             } else {
-                text = [NSString stringWithFormat:@"%d 月", month];
+                month = [[masterData_.monthDatas objectAtIndex:indexPath.row] intValue];
+                if (month < 10) {
+                    text = [NSString stringWithFormat:@"  %d 月", month];
+                } else {
+                    text = [NSString stringWithFormat:@"%d 月", month];
+                }
+                detailText = [NSString stringWithFormat:@"%d 本",
+                              [[monthDict_ objectForKey:[masterData_.monthDatas objectAtIndex:indexPath.row]] intValue]];
+                break;
             }
-            detailText = [NSString stringWithFormat:@"%d 本",
-                          [[monthDict_ objectForKey:[masterData_.monthDatas objectAtIndex:indexPath.row]] intValue]];
-            break;
         case LIST_TYPE_COUNTRY:
             if ([masterData_.countryDatas count] > indexPath.row) {
                 text = [masterData_.countryDatas objectAtIndex:indexPath.row];
@@ -331,9 +370,14 @@
         case LIST_TYPE_SCORE:
             header = [NSString stringWithFormat:@"   %@ 年   点数別 本数", year_];
             break;
-        case LIST_TYPE_MONTH:
-            header = [NSString stringWithFormat:@"   %@ 年   月別 本数", year_];
-            break;
+        case LIST_TYPE_TERM:
+            if ([year_ isEqualToString:@"すべて"]) {
+                header = [NSString stringWithFormat:@"   %@ 年   月別 本数", year_];
+                break;
+            } else {
+                header = [NSString stringWithFormat:@"   %@ 年   月別 本数", year_];
+                break;
+            }
         case LIST_TYPE_COUNTRY:
             header = [NSString stringWithFormat:@"   %@ 年   制作国別 本数", year_];
             break;

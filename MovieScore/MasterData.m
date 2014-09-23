@@ -135,9 +135,9 @@ static MasterData* sharedHistory = nil;
     NSArray *data =  [[NSArray alloc] initWithObjects:
                         @"映画館(新作)",
                         @"映画館(旧作)",
+                        @"PC・モバイル",
                         @"DVD・Blu-ray",
                         @"テレビ",
-                        @"PC・モバイル",
                         @"その他",
                       nil];
     [data autorelease];
@@ -153,6 +153,9 @@ static MasterData* sharedHistory = nil;
         case PLACE_TYPE_OLD:
             return @"映画館(旧作)";
             break;
+        case PLACE_TYPE_DVD_BLURAY:
+            return @"DVD・Blu-ray";
+            break;
         default:
             return nil;
             break;
@@ -167,6 +170,9 @@ static MasterData* sharedHistory = nil;
             break;
         case PLACE_TYPE_OLD:
             return @"旧作のみ";
+            break;
+        case PLACE_TYPE_DVD_BLURAY:
+            return @"DVD・Blu-ray";
             break;
         case PLACE_TYPE_ALL:
             return @"すべて";
