@@ -64,7 +64,7 @@
     }
     
     UISegmentedControl *segmentCtl = [[[UISegmentedControl alloc] initWithItems:titles] autorelease];
-    segmentCtl.frame = CGRectMake(0.0, 0.0, 290.0, 30.0);
+    segmentCtl.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width * 0.90, 30.0);
     [segmentCtl addTarget:self action:@selector(listSegmentedControl:) forControlEvents:UIControlEventValueChanged];
     
     UIBarButtonItem *segmentBarItem = [[[UIBarButtonItem alloc] initWithCustomView:segmentCtl] autorelease];

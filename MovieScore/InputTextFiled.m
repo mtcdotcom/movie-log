@@ -104,12 +104,8 @@
         [[self.view viewWithTag:BUTTON_TAG_NO]removeFromSuperview];
     }
 
-    NSDictionary *info  = [note userInfo];
-    NSValue *keyValue   = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGSize keyboardSize = [keyValue CGRectValue].size;
-    NSInteger toolbarY  = self.view.frame.size.height - keyboardSize.height - 10.0;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(self.view.frame.size.width - 122.0, toolbarY, 100.0, 33.0);
+    button.frame = CGRectMake(self.view.frame.size.width - 122.0, 120.0, 100.0, 33.0);
     button.tag   = BUTTON_TAG_NO;
     button.titleLabel.font = BUTTON_FONT;
     [button setTitle:@"OK" forState:UIControlStateNormal];

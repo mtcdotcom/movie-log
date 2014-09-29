@@ -53,11 +53,11 @@
                                     target:nil
                                     action:nil] autorelease];
     UIBarButtonItem *placeButton = [[[UIBarButtonItem alloc]
-                                     initWithTitle:@"絞り込み" style:UIBarButtonItemStyleBordered
+                                     initWithTitle:@"絞り込み" style:UIBarButtonItemStylePlain
                                      target:self
                                      action:@selector(selectAction)] autorelease];
     UIBarButtonItem *itemButton = [[[UIBarButtonItem alloc]
-                                     initWithTitle:@" 項目別 " style:UIBarButtonItemStyleBordered
+                                     initWithTitle:@" 項目別 " style:UIBarButtonItemStylePlain
                                      target:self
                                      action:@selector(callSummaryDetail)] autorelease];
     
@@ -306,7 +306,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[[UIView alloc] init] autorelease];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 22.0)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 22.0)];
     label.backgroundColor = SECTION_BGCOLOR;
     label.textColor       = SECTION_COLOR;
     label.font            = SECTION_FONT;

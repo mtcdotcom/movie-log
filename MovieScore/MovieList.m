@@ -44,15 +44,15 @@
                                     target:nil
                                     action:nil] autorelease];    
     UIBarButtonItem *placeButton = [[[UIBarButtonItem alloc]
-                                    initWithTitle:@"絞り込み" style:UIBarButtonItemStyleBordered
+                                    initWithTitle:@"絞り込み" style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(selectAction)] autorelease];
     UIBarButtonItem *sortButton = [[[UIBarButtonItem alloc]
-                                    initWithTitle:@"並び換え" style:UIBarButtonItemStyleBordered
+                                    initWithTitle:@"並び換え" style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(sortAction)] autorelease];
     UIBarButtonItem *summaryButton = [[[UIBarButtonItem alloc]
-                                       initWithTitle:@"サマリー" style:UIBarButtonItemStyleBordered
+                                       initWithTitle:@"サマリー" style:UIBarButtonItemStylePlain
                                        target:self
                                        action:@selector(callSummary)] autorelease];
     
@@ -83,7 +83,7 @@
     self.navigationController.navigationBar.tintColor = TINT_COLOR;
     
 	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
-                                              initWithTitle:@"期間選択" style:UIBarButtonItemStyleBordered
+                                              initWithTitle:@"期間選択" style:UIBarButtonItemStylePlain
                                               target:self
                                               action:@selector(callTerm)] autorelease];
     
